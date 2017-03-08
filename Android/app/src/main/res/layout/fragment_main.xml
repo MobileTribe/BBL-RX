@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--- Exemples RxJava ---"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/main_activity_basic_demo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basic demo"/>
+
+    <Button
+        android:id="@+id/main_activity_places_autocomplete_demo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Places autocomplete demo"/>
+
+    <Button
+        android:id="@+id/main_activity_chained_calls_demo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="chained WS calls demo"/>
+
+    <Button
+        android:id="@+id/main_activity_long_call_demo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="longgggg call demo"/>
+
+</LinearLayout>
