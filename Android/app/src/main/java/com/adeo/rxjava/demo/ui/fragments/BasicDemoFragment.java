@@ -51,7 +51,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(String value) {
                         addText("onNext : " + value);
                     }
 
@@ -81,7 +81,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(String value) {
                         addText("onNext : " + value);
                     }
 
@@ -113,7 +113,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(String value) {
                         addText("onNext : " + value);
                     }
 
