@@ -14,11 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
+import static android.R.attr.value;
 import static com.adeo.rxjava.demo.DateUtil.getDate;
 
 /**
@@ -40,11 +42,16 @@ public class BasicDemoFragment extends BaseFragment {
     void basicDemo() {
         mTvResult.setText("");
         Observable.just("one", "two", "three", "four", "five")
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
-                    public void onNext(String value) {
+                    public void onSubscribe(Disposable d) {
+                        addText("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(String s) {
                         addText("onNext : " + value);
                     }
 
@@ -54,7 +61,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         addText("onComplete");
                     }
                 });
@@ -69,7 +76,12 @@ public class BasicDemoFragment extends BaseFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
-                    public void onNext(String value) {
+                    public void onSubscribe(Disposable d) {
+                        addText("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(String s) {
                         addText("onNext : " + value);
                     }
 
@@ -79,7 +91,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         addText("onComplete");
                     }
                 });
@@ -96,7 +108,12 @@ public class BasicDemoFragment extends BaseFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
-                    public void onNext(String value) {
+                    public void onSubscribe(Disposable d) {
+                        addText("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(String s) {
                         addText("onNext : " + value);
                     }
 
@@ -106,7 +123,7 @@ public class BasicDemoFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         addText("onComplete");
                     }
                 });

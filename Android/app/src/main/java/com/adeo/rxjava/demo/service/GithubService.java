@@ -5,10 +5,10 @@ import com.adeo.rxjava.demo.model.GithubRepoSearch;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
-import rx.Observable;
 
 /**
  * Created by paul-hubert on 02/01/2017.

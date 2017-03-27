@@ -14,14 +14,14 @@ import com.adeo.rxjava.demo.ui.fragments.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by paul-hubert on 19/12/2016.
@@ -48,14 +48,14 @@ public class ChainedCallsFragment extends BaseFragment {
                 .baseUrl("https://api.github.com")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         GithubService service = retrofit.create(GithubService.class);
 
 
         Observable.just("rx")
                 .flatMap(query -> service.search(query, "stars"))
-                .flatMap(githubRepoSearch -> Observable.from(githubRepoSearch.getItems()))
+                .flatMap(githubRepoSearch -> Observable.fromIterable(githubRepoSearch.getItems()))
                 .take(3)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(githubRepo -> {

@@ -15,10 +15,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by paul-hubert on 03/01/2017.
@@ -28,7 +28,7 @@ public class LongCallFragment extends Fragment {
 
     private Unbinder mUnbinder;
 
-    private Subscription mSubscription;
+    private Disposable mDisposable;
 
     @BindView(R.id.long_call_tv)
     TextView mTvLongCall;
@@ -48,8 +48,8 @@ public class LongCallFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mSubscription != null) {
-            mSubscription.unsubscribe();
+        if (mDisposable != null) {
+            mDisposable.dispose();
         }
         mUnbinder.unbind();
     }
@@ -61,7 +61,7 @@ public class LongCallFragment extends Fragment {
 
     @OnClick(R.id.long_call_with_rx_btn)
     void longCallWithRx() {
-        mSubscription = Observable.just("rx")
+        mDisposable = Observable.just("rx")
                 .map(s -> {
                     try {
                         Thread.sleep(5000); // Don't do that :)
